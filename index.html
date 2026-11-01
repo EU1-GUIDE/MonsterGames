@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monster Games | Official Private Server Directory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #0b0f17;
+      color: #e6edf3;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 16px;
+    }
+
+    .hub-container {
+      width: 100%;
+      max-width: 580px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* Brand Header */
+    .profile-header {
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .brand-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #00ff88;
+      background: rgba(0, 255, 136, 0.1);
+      border: 1px solid rgba(0, 255, 136, 0.25);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .profile-name {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .profile-subtitle {
+      color: #8b949e;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+    }
+
+    /* Portal Cards Stack */
+    .portal-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .portal-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #141a24;
+      border: 1px solid #252f3f;
+      border-radius: 12px;
+      padding: 16px 20px;
+      text-decoration: none;
+      color: #e6edf3;
+      transition: all 0.2s ease;
+    }
+
+    .portal-link:hover {
+      background: #1a2230;
+      border-color: #56d4ff;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .portal-info {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .portal-icon {
+      font-size: 1.6rem;
+    }
+
+    .portal-text h2 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #ffffff;
+      margin-bottom: 2px;
+    }
+
+    .portal-text p {
+      font-size: 0.82rem;
+      color: #8b949e;
+    }
+
+    .arrow-icon {
+      color: #56d4ff;
+      font-size: 1.2rem;
+      font-weight: 700;
+      transition: transform 0.2s ease;
+    }
+
+    .portal-link:hover .arrow-icon {
+      transform: translateX(4px);
+    }
+
+    /* Coming Soon Card */
+    .portal-link.coming-soon {
+      opacity: 0.65;
+      border-style: dashed;
+      border-color: #303b4d;
+      background: #0f141d;
+      cursor: default;
+    }
+
+    .portal-link.coming-soon:hover {
+      transform: none;
+      border-color: #303b4d;
+      box-shadow: none;
+    }
+
+    .badge-soon {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #ffd166;
+      background: rgba(255, 209, 102, 0.12);
+      border: 1px solid rgba(255, 209, 102, 0.3);
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    /* Footer */
+    .hub-footer {
+      text-align: center;
+      color: #4b5563;
+      font-size: 0.8rem;
+      margin-top: 10px;
+      letter-spacing: 0.5px;
+    }
+  </style>
+</head>
+<body>
+
+  <main class="hub-container">
+    <!-- Header -->
+    <header class="profile-header">
+      <div class="brand-badge">Curated by Monstrosity</div>
+      <h1 class="profile-name">Monster Games</h1>
+      <p class="profile-subtitle">Official Community Hub & Private Server Directory</p>
+    </header>
+
+    <!-- Links / Cards -->
+    <nav class="portal-stack">
+      <!-- 1. EU1 Whiteout Survival -->
+      <a href="https://eu1-beta-realm.github.io" target="_blank" rel="noopener noreferrer" class="portal-link">
+        <div class="portal-info">
+          <span class="portal-icon">❄️</span>
+          <div class="portal-text">
+            <h2>EU1 WOS BETA</h2>
+            <p>Survival toolkit, active gift codes & web store</p>
+          </div>
+        </div>
+        <span class="arrow-icon">➔</span>
+      </a>
+
+      <!-- 2. V4 -->
+      <a href="#" class="portal-link">
+        <div class="portal-info">
+          <span class="portal-icon">⚔️</span>
+          <div class="portal-text">
+            <h2>V4</h2>
+            <p>Server access, active events & promo pack cache</p>
+          </div>
+        </div>
+        <span class="arrow-icon">➔</span>
+      </a>
+
+      <!-- 3. V5 -->
+      <a href="#" class="portal-link">
+        <div class="portal-info">
+          <span class="portal-icon">🛡️</span>
+          <div class="portal-text">
+            <h2>V5</h2>
+            <p>High-rate progression, download links & server guide</p>
+          </div>
+        </div>
+        <span class="arrow-icon">➔</span>
+      </a>
+
+      <!-- 4. Night War -->
+      <a href="#" class="portal-link">
+        <div class="portal-info">
+          <span class="portal-icon">🌑</span>
+          <div class="portal-text">
+            <h2>Night War</h2>
+            <p>Custom realm APK, community Discord & gift codes</p>
+          </div>
+        </div>
+        <span class="arrow-icon">➔</span>
+      </a>
+
+      <!-- 5. Coming Soon -->
+      <div class="portal-link coming-soon">
+        <div class="portal-info">
+          <span class="portal-icon">⏳</span>
+          <div class="portal-text">
+            <h2>More Games & Private Realms</h2>
+            <p>New server partnerships and promotional caches onboarding soon</p>
+          </div>
+        </div>
+        <span class="badge-soon">Soon</span>
+      </div>
+    </nav>
+
+    <footer class="hub-footer">
+      MONSTER GAMES DIRECTORY • ALL RIGHTS RESERVED
+    </footer>
+  </main>
+
+</body>
+</html>
