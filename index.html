@@ -6,9 +6,68 @@
   <title>Monster Games | Official Private Server Directory</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Rajdhani:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Zero-Flicker Pre-Render Script: Applies saved theme before first paint -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('monster_games_theme');
+      if (savedTheme === 'light') {
+        document.documentElement.classList.add('light-mode');
+      }
+    })();
+  </script>
 
   <style>
+    /* ========================================================
+       THEME 1: CYBER SHADOW (DEFAULT - PURE BLACK & ELECTRIC BLUE)
+       High-voltage, saturated cyan/cobalt glow on deep void black.
+       ======================================================== */
+    :root {
+      --bg-base: #04070d;
+      --bg-card: rgba(8, 14, 24, 0.92);
+      --bg-card-hover: rgba(12, 22, 38, 0.98);
+      --border-cyan: #00e5ff;
+      --border-muted: rgba(0, 229, 255, 0.28);
+      --electric-blue: #0077fe;
+      --neon-cyan: #00e5ff;
+      --glow-core: rgba(0, 229, 255, 0.65);
+      --glow-spread: rgba(0, 119, 254, 0.45);
+      --text-main: #f0f8ff;
+      --text-muted: #8ca5c4;
+      --text-accent: #00e5ff;
+      --tag-green: #00ff88;
+      --tag-green-bg: rgba(0, 255, 136, 0.16);
+      --soon-gold: #ffd166;
+      --soon-gold-bg: rgba(255, 209, 102, 0.14);
+      --toggle-bg: rgba(0, 229, 255, 0.1);
+      --toggle-border: rgba(0, 229, 255, 0.35);
+    }
+
+    /* ========================================================
+       THEME 2: DAYBREAK TACTICAL (CLEAN & HIGH-CONTRAST LIGHT)
+       ======================================================== */
+    html.light-mode, body.light-mode {
+      --bg-base: #f0f4f9;
+      --bg-card: rgba(255, 255, 255, 0.96);
+      --bg-card-hover: #ffffff;
+      --border-cyan: #0077fe;
+      --border-muted: rgba(0, 119, 254, 0.25);
+      --electric-blue: #0056c7;
+      --neon-cyan: #0088cc;
+      --glow-core: rgba(0, 119, 254, 0.25);
+      --glow-spread: rgba(0, 119, 254, 0.15);
+      --text-main: #06111f;
+      --text-muted: #4b617b;
+      --text-accent: #0056c7;
+      --tag-green: #0e8a4a;
+      --tag-green-bg: rgba(14, 138, 74, 0.12);
+      --soon-gold: #b45309;
+      --soon-gold-bg: rgba(180, 83, 9, 0.12);
+      --toggle-bg: rgba(0, 119, 254, 0.08);
+      --toggle-border: rgba(0, 119, 254, 0.3);
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -16,171 +75,324 @@
     }
 
     body {
-      background-color: #0b0f17;
-      color: #e6edf3;
+      background: var(--bg-base);
+      color: var(--text-main);
       font-family: 'Inter', sans-serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 40px 16px;
+      padding: 32px 16px;
+      transition: background 0.3s ease, color 0.3s ease;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Ambient cyber radial glow in background */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 650px;
+      height: 650px;
+      background: radial-gradient(circle, var(--glow-spread) 0%, transparent 68%);
+      opacity: 0.35;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
     }
 
     .hub-container {
       width: 100%;
-      max-width: 580px;
+      max-width: 620px;
+      position: relative;
+      z-index: 1;
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 22px;
     }
 
-    /* Brand Header */
-    .profile-header {
-      text-align: center;
-      margin-bottom: 6px;
+    /* Top Control Banner with Theme Switcher */
+    .top-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
     }
 
-    .brand-badge {
-      display: inline-block;
-      font-size: 0.75rem;
-      font-weight: 700;
+    .status-pulse-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 800;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      color: #00ff88;
-      background: rgba(0, 255, 136, 0.1);
-      border: 1px solid rgba(0, 255, 136, 0.25);
-      padding: 4px 12px;
+      color: var(--tag-green);
+      background: var(--tag-green-bg);
+      border: 1px solid var(--tag-green);
+      padding: 5px 12px;
       border-radius: 20px;
-      margin-bottom: 12px;
+      box-shadow: 0 0 12px rgba(0, 255, 136, 0.3);
     }
 
-    .profile-name {
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--tag-green);
+      box-shadow: 0 0 8px var(--tag-green);
+      animation: pulse 1.6s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.35); opacity: 0.6; }
+    }
+
+    .theme-toggle-btn {
+      background: var(--toggle-bg);
+      border: 1px solid var(--toggle-border);
+      color: var(--text-main);
+      padding: 6px 14px;
+      border-radius: 20px;
       font-family: 'Rajdhani', sans-serif;
-      font-size: 2.4rem;
+      font-size: 0.88rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.25s ease;
+      outline: none;
+    }
+
+    .theme-toggle-btn:hover {
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 14px var(--glow-core);
+      color: var(--neon-cyan);
+    }
+
+    /* Hero Header */
+    .brand-hero {
+      text-align: center;
+      padding: 24px 16px 18px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(0, 229, 255, 0.08) 0%, transparent 100%);
+      border: 1px solid var(--border-muted);
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.45);
+    }
+
+    .creator-tag {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.88rem;
       font-weight: 800;
       letter-spacing: 2px;
       text-transform: uppercase;
+      color: var(--neon-cyan);
+      margin-bottom: 6px;
+      text-shadow: 0 0 10px var(--glow-core);
+    }
+
+    .brand-title {
+      font-family: 'Cinzel', serif;
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: 3px;
+      text-transform: uppercase;
       color: #ffffff;
-      margin-bottom: 4px;
+      text-shadow: 0 0 20px var(--glow-core), 0 0 40px var(--electric-blue);
+      line-height: 1.1;
+      margin-bottom: 8px;
     }
 
-    .profile-subtitle {
-      color: #8b949e;
-      font-size: 0.95rem;
-      letter-spacing: 0.5px;
+    html.light-mode .brand-title {
+      color: #06111f;
+      text-shadow: none;
     }
 
-    /* Portal Cards Stack */
+    .brand-subtitle {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      letter-spacing: 0.8px;
+    }
+
+    /* Portals Stack */
     .portal-stack {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 14px;
     }
 
     .portal-link {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: #141a24;
-      border: 1px solid #252f3f;
-      border-radius: 12px;
-      padding: 16px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-muted);
+      border-radius: 16px;
+      padding: 18px 22px;
       text-decoration: none;
-      color: #e6edf3;
-      transition: all 0.2s ease;
+      color: var(--text-main);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    }
+
+    /* Subtle electric highlight strip on hover */
+    .portal-link::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 4px;
+      background: linear-gradient(180deg, var(--neon-cyan) 0%, var(--electric-blue) 100%);
+      opacity: 0;
+      transition: opacity 0.25s ease;
     }
 
     .portal-link:hover {
-      background: #1a2230;
-      border-color: #56d4ff;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+      background: var(--bg-card-hover);
+      border-color: var(--neon-cyan);
+      transform: translateY(-3px) scale(1.01);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45), 0 0 22px var(--glow-core);
+    }
+
+    .portal-link:hover::before {
+      opacity: 1;
     }
 
     .portal-info {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 16px;
     }
 
     .portal-icon {
-      font-size: 1.6rem;
+      font-size: 1.85rem;
+      filter: drop-shadow(0 0 8px var(--glow-core));
+      transition: transform 0.2s ease;
+    }
+
+    .portal-link:hover .portal-icon {
+      transform: scale(1.1);
     }
 
     .portal-text h2 {
       font-family: 'Rajdhani', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      color: #ffffff;
+      font-size: 1.45rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--text-main);
       margin-bottom: 2px;
+      text-transform: uppercase;
     }
 
     .portal-text p {
-      font-size: 0.82rem;
-      color: #8b949e;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.35;
     }
 
-    .arrow-icon {
-      color: #56d4ff;
-      font-size: 1.2rem;
-      font-weight: 700;
-      transition: transform 0.2s ease;
+    .portal-arrow-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--neon-cyan);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+      transition: transform 0.25s ease;
     }
 
-    .portal-link:hover .arrow-icon {
-      transform: translateX(4px);
+    .portal-link:hover .portal-arrow-badge {
+      transform: translateX(5px);
+      text-shadow: 0 0 12px var(--glow-core);
     }
 
     /* Coming Soon Card */
     .portal-link.coming-soon {
-      opacity: 0.65;
+      opacity: 0.7;
       border-style: dashed;
-      border-color: #303b4d;
-      background: #0f141d;
+      border-color: var(--border-muted);
       cursor: default;
     }
 
     .portal-link.coming-soon:hover {
       transform: none;
-      border-color: #303b4d;
+      border-color: var(--border-muted);
       box-shadow: none;
     }
 
+    .portal-link.coming-soon:hover::before {
+      opacity: 0;
+    }
+
     .badge-soon {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 1px;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
-      color: #ffd166;
-      background: rgba(255, 209, 102, 0.12);
-      border: 1px solid rgba(255, 209, 102, 0.3);
-      padding: 3px 8px;
-      border-radius: 6px;
+      color: var(--soon-gold);
+      background: var(--soon-gold-bg);
+      border: 1px solid var(--soon-gold);
+      padding: 4px 10px;
+      border-radius: 8px;
     }
 
     /* Footer */
     .hub-footer {
       text-align: center;
-      color: #4b5563;
-      font-size: 0.8rem;
-      margin-top: 10px;
-      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      letter-spacing: 1px;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 520px) {
+      .brand-title {
+        font-size: 2.3rem;
+      }
+      .portal-link {
+        padding: 16px;
+      }
+      .portal-text h2 {
+        font-size: 1.25rem;
+      }
     }
   </style>
 </head>
 <body>
 
   <main class="hub-container">
-    <!-- Header -->
-    <header class="profile-header">
-      <div class="brand-badge">Curated by Monstrosity</div>
-      <h1 class="profile-name">Monster Games</h1>
-      <p class="profile-subtitle">Official Community Hub & Private Server Directory</p>
+    <!-- Top Bar Controls -->
+    <div class="top-controls">
+      <div class="status-pulse-badge">
+        <span class="pulse-dot"></span>
+        Active Networks
+      </div>
+      <button type="button" class="theme-toggle-btn" onclick="toggleTheme()" id="themeToggleBtn">
+        ☀️ Light Mode
+      </button>
+    </div>
+
+    <!-- Hero Header -->
+    <header class="brand-hero">
+      <div class="creator-tag">MONSTROSITY PRESENTS</div>
+      <h1 class="brand-title">Monster Games</h1>
+      <p class="brand-subtitle">Official Command Portal & Private Server Directory</p>
     </header>
 
-    <!-- Links / Cards -->
+    <!-- Navigation Stack -->
     <nav class="portal-stack">
       <!-- 1. EU1 Whiteout Survival -->
       <a href="https://eu1-beta-realm.github.io" target="_blank" rel="noopener noreferrer" class="portal-link">
@@ -191,7 +403,7 @@
             <p>Survival toolkit, active gift codes & web store</p>
           </div>
         </div>
-        <span class="arrow-icon">➔</span>
+        <div class="portal-arrow-badge">ENTER ➔</div>
       </a>
 
       <!-- 2. V4 -->
@@ -199,11 +411,11 @@
         <div class="portal-info">
           <span class="portal-icon">⚔️</span>
           <div class="portal-text">
-            <h2>V4</h2>
-            <p>Server access, active events & promo pack cache</p>
+            <h2>V4 Server</h2>
+            <p>Direct APK, active events & promo pack cache</p>
           </div>
         </div>
-        <span class="arrow-icon">➔</span>
+        <div class="portal-arrow-badge">ENTER ➔</div>
       </a>
 
       <!-- 3. V5 -->
@@ -211,11 +423,11 @@
         <div class="portal-info">
           <span class="portal-icon">🛡️</span>
           <div class="portal-text">
-            <h2>V5</h2>
+            <h2>V5 Server</h2>
             <p>High-rate progression, download links & server guide</p>
           </div>
         </div>
-        <span class="arrow-icon">➔</span>
+        <div class="portal-arrow-badge">ENTER ➔</div>
       </a>
 
       <!-- 4. Night War -->
@@ -227,7 +439,7 @@
             <p>Custom realm APK, community Discord & gift codes</p>
           </div>
         </div>
-        <span class="arrow-icon">➔</span>
+        <div class="portal-arrow-badge">ENTER ➔</div>
       </a>
 
       <!-- 5. Coming Soon -->
@@ -235,18 +447,46 @@
         <div class="portal-info">
           <span class="portal-icon">⏳</span>
           <div class="portal-text">
-            <h2>More Games & Private Realms</h2>
+            <h2>Next Generation Realms</h2>
             <p>New server partnerships and promotional caches onboarding soon</p>
           </div>
         </div>
-        <span class="badge-soon">Soon</span>
+        <span class="badge-soon">Coming Soon</span>
       </div>
     </nav>
 
     <footer class="hub-footer">
-      MONSTER GAMES DIRECTORY • ALL RIGHTS RESERVED
+      MONSTER GAMES DIRECTORY • CURATED BY MONSTROSITY
     </footer>
   </main>
 
+  <script>
+    // Theme Engine with Persistent localStorage Support
+    function applyTheme(theme) {
+      const btn = document.getElementById('themeToggleBtn');
+      if (theme === 'light') {
+        document.documentElement.classList.add('light-mode');
+        document.body.classList.add('light-mode');
+        localStorage.setItem('monster_games_theme', 'light');
+        if (btn) btn.innerHTML = '🌙 Cyber Mode';
+      } else {
+        document.documentElement.classList.remove('light-mode');
+        document.body.classList.remove('light-mode');
+        localStorage.setItem('monster_games_theme', 'dark');
+        if (btn) btn.innerHTML = '☀️ Light Mode';
+      }
+    }
+
+    function toggleTheme() {
+      const current = localStorage.getItem('monster_games_theme') || 'dark';
+      applyTheme(current === 'dark' ? 'light' : 'dark');
+    }
+
+    // Initialize toggle button state on DOM load
+    document.addEventListener('DOMContentLoaded', () => {
+      const current = localStorage.getItem('monster_games_theme') || 'dark';
+      applyTheme(current);
+    });
+  </script>
 </body>
 </html>
